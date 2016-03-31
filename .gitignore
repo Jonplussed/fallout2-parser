@@ -1,0 +1,13 @@
+.DS_Store
+.ghci
+.cabal-sandbox
+cabal.sandbox.config
+*.a
+*.dylib
+.dyn*
+*.hi
+*.hi-boot
+*.o
+*.o-boot
+dist/
+.stack-work
