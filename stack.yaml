@@ -9,21 +9,21 @@ packages:
 
 # Packages to be pulled from upstream that are not in the resolver (e.g., acme-missiles-0.3)
 extra-deps:
-- attoparsec-0.13.0.1
-- hspec-2.2.2
 - aeson-0.11.1.4
+- attoparsec-0.13.0.1
 - dlist-0.7.1.2
+- fail-4.9.0.0
 - hashable-1.2.3.3
+- hspec-2.2.2
 - mtl-2.2.1
+- primitive-0.6.1.0
 - scientific-0.3.4.4
 - semigroups-0.18.0.1
 - syb-0.6
+- tagged-0.8.3
 - text-1.2.2.0
 - unordered-containers-0.2.5.1
 - vector-0.11.0.0
-- fail-4.9.0.0
-- primitive-0.6.1.0
-- tagged-0.8.3
 
 # Override default flag values for local packages and extra-deps
 flags: {}

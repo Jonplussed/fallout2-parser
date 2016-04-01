@@ -14,7 +14,7 @@ module Fallout2.Types
   , Script (..)
   , Spacing (..)
   , ItemStatus (..)
-  , NpcType (..)
+  , NpcStatus (..)
   , NpcPosition (..)
   , Item (..)
   , Npc (..)
@@ -48,21 +48,21 @@ instance A.ToJSON ItemStatus where
       A.String "wielded"
   toJSON (Carried low high) =
       A.object
-        [ "carried_min" .= A.toJSON low
-        , "carried_max" .= A.toJSON high
+        [ "carried_min" .= low
+        , "carried_max" .= high
         ]
 
-data NpcType
+data NpcStatus
   = Dead
   | Ratio Int
   deriving (Eq, Show)
 
-instance A.ToJSON NpcType where
+instance A.ToJSON NpcStatus where
   toJSON Dead =
     A.String "dead"
   toJSON (Ratio r) =
     A.object
-      [ "ratio" .= A.toJSON (show r <> "%")
+      [ "ratio" .= (show r <> "%")
       ]
 
 data NpcPosition
@@ -94,7 +94,7 @@ instance A.ToJSON Item where
 
 data Npc = Npc
   { npcName :: Name
-  , npcType :: NpcType
+  , npcType :: NpcStatus
   , npcPid :: PID
   , npcItems :: [Item]
   , npcDistance :: Distance
