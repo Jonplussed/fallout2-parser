@@ -7,12 +7,15 @@ library
   hs-source-dirs:       src
   exposed-modules:      Fallout2.Parser
                       , Fallout2.Types
-  other-modules:        Fallout2.Parser.Tokens
+  other-modules:        Fallout2.Parser.Permutation
+                      , Fallout2.Parser.Tokens
   build-depends:        base >= 4.7 && < 5
                       , attoparsec
                       , aeson
                       , containers
+                      , mtl
                       , text
+                      , transformers
   default-language:     Haskell2010
 
 executable main
