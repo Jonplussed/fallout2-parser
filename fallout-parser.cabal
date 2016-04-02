@@ -2,9 +2,11 @@ name:                   fallout-parser
 version:                0.1.0.0
 synopsis:               parser for the Fallout 2 world file
 cabal-version:          >= 1.10
+build-type:             simple
 
 library
   hs-source-dirs:       src
+  ghc-options:          -Werror -Wall
   exposed-modules:      Fallout2.Parser
                       , Fallout2.Types
   other-modules:        Fallout2.Parser.Permutation

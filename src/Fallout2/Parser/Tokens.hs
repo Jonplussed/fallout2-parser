@@ -9,11 +9,15 @@ import Data.Text (Text)
 
 colon_ =        ':'               :: Char
 comma_ =        ';'               :: Char
-equalSign_ =    '='               :: Char
+equals_ =       '='               :: Char
 lbracket_ =     '['               :: Char
 rbracket_ =     ']'               :: Char
+lparens_ =      '('               :: Char
+rparens_ =      ')'               :: Char
 semicolon_ =    ';'               :: Char
 underscore_ =   '_'               :: Char
+percent_ =      '%'               :: Char
+minus_ =        '-'               :: Char
 
 -- strings
 
@@ -33,6 +37,7 @@ cone_ =         "cone"            :: Text
 huddle_ =       "huddle"          :: Text
 doubleLine_ =   "double_line"     :: Text
 wedge_ =        "wedge"           :: Text
+wielded_ =      "wielded"         :: Text
 
 -- tests
 
