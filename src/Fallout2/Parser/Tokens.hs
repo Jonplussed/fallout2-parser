@@ -1,34 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Fallout2.Parser.Tokens
-  ( colon_
-  , comma_
-  , equalSign_
-  , lbracket_
-  , rbracket_
-  , semicolon_
-  , underscore_
-
-  , type_
-  , encounter_
-  , dead_
-  , position_
-  , surrounding_
-  , distance_
-  , ratio_
-  , item_
-  , script_
-  , pid_
-  , straightLine_
-  , spacing_
-  , cone_
-  , huddle_
-  , doubleLine_
-  , wedge_
-
-  , isNotComma
-  , isNotSpace
-  ) where
+module Fallout2.Parser.Tokens where
 
 import Data.Char (Char, isSpace)
 import Data.Text (Text)

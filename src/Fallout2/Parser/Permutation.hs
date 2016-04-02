@@ -2,16 +2,18 @@
 
 module Fallout2.Parser.Permutation
   ( KeyValsMap
+  , PermParser
   , opt1
   , req1
   , optN
   , reqN
   , opt1Of
   , req1Of
+  , runPermParser
   ) where
 
-import Control.Monad.Reader (Reader, ask)
-import Control.Monad.Trans.Except (ExceptT, throwE)
+import Control.Monad.Reader (Reader, ask, runReader)
+import Control.Monad.Trans.Except (ExceptT, throwE, runExceptT)
 import Data.Maybe (catMaybes)
 import Data.Monoid ((<>))
 import Data.Attoparsec.Text (Parser, parseOnly)
@@ -65,6 +67,9 @@ req1Of opts = do
     case optResults of
       Nothing -> throwE . oneOfKeyReq $ map fst opts
       Just val -> return val
+
+runPermParser :: PermParser a -> KeyValsMap -> Parser a
+runPermParser parser = either fail return . runReader (runExceptT parser)
 
 -- error messages
 

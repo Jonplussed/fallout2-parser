@@ -94,11 +94,9 @@ instance A.ToJSON Item where
 
 data Npc = Npc
   { npcName :: Name
-  , npcType :: NpcStatus
+  , npcStatus :: NpcStatus
   , npcPid :: PID
   , npcItems :: [Item]
-  , npcDistance :: Distance
-  , npcCondition :: Condition
   } deriving (Eq, Generic, Show)
 
 instance A.ToJSON Npc where
@@ -109,6 +107,7 @@ data Encounter = Encounter
   , encNpcs :: [Npc]
   , encPosition :: NpcPosition
   , encSpacing :: Spacing
+  , encDistance :: Distance
   } deriving (Eq, Generic, Show)
 
 instance A.ToJSON Encounter where

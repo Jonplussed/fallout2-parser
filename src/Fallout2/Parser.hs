@@ -4,15 +4,14 @@ import Prelude hiding (takeWhile)
 
 import qualified Data.Char as C
 import qualified Data.List as L
-import qualified Data.Map as M
+import qualified Data.Map.Strict as M
 import qualified Data.Text as T
 import qualified Fallout2.Types as F
 import qualified Fallout2.Types as F
 
 import Data.Attoparsec.Text
 import Fallout2.Parser.Tokens
-
-type KeyValsMap = M.Map T.Text [T.Text]
+import Fallout2.Parser.Permutation
 
 comment :: Parser T.Text
 comment = do
@@ -48,8 +47,24 @@ npcLine = do
     char equalSign_
     keyVals <- mapKeyVals <$> commaSep keyVal
     skipSpace
-    name <- comment
-    return $ makeNpc name keyVals
+    name <- F.Name <$> comment
+    runPermParser (makeNpc name) keyVals
 
-makeNpc :: T.Text -> KeyValsMap -> F.Npc
-makeNpc = undefined
+parseDead :: Parser F.NpcStatus
+parseDead = undefined
+
+parseRatio :: Parser F.NpcStatus
+parseRatio = undefined
+
+parsePid :: Parser F.PID
+parsePid = undefined
+
+parseItem :: Parser F.Item
+parseItem = undefined
+
+makeNpc :: F.Name -> PermParser F.Npc
+makeNpc name =
+    F.Npc name
+      <$> req1Of [(dead_, parseDead), (ratio_, parseRatio)]
+      <*> req1 pid_ parsePid
+      <*> optN item_ parseItem
