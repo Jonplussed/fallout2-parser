@@ -40,16 +40,16 @@ newtype Spacing = Spacing Int deriving (Eq, Show, A.ToJSON)
 
 data ItemStatus
   = Wielded
-  | Carried Int Int
+  | Inventory Int Int
   deriving (Eq, Show)
 
 instance A.ToJSON ItemStatus where
   toJSON Wielded =
       A.String "wielded"
-  toJSON (Carried low high) =
+  toJSON (Inventory low high) =
       A.object
-        [ "carried_min" .= low
-        , "carried_max" .= high
+        [ "inventory_min" .= low
+        , "inventory_max" .= high
         ]
 
 data NpcStatus

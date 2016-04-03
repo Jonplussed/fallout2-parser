@@ -1,14 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
 
 module Fallout2.Parser.Tokens where
 
-import Data.Char (Char, isSpace)
 import Data.Text (Text)
 
 -- chars
 
 colon_ =        ':'               :: Char
-comma_ =        ';'               :: Char
+comma_ =        ','               :: Char
 equals_ =       '='               :: Char
 lbracket_ =     '['               :: Char
 rbracket_ =     ']'               :: Char
@@ -27,7 +27,7 @@ dead_ =         "Dead"            :: Text
 position_ =     "position"        :: Text
 surrounding_ =  "Surrounding"     :: Text
 distance_ =     "Distance"        :: Text
-ratio_ =        "Ratio"           :: Text
+ratio_ =        "ratio"           :: Text
 item_ =         "Item"            :: Text
 script_ =       "Script"          :: Text
 pid_ =          "pid"             :: Text
@@ -38,8 +38,3 @@ huddle_ =       "huddle"          :: Text
 doubleLine_ =   "double_line"     :: Text
 wedge_ =        "wedge"           :: Text
 wielded_ =      "wielded"         :: Text
-
--- tests
-
-isNotComma =    (/= comma_)
-isNotSpace =    not . isSpace
