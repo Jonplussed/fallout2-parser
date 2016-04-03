@@ -4,14 +4,12 @@ import Control.Monad (void)
 
 import qualified Data.Attoparsec.Text as A
 import qualified Data.Char as C
-import qualified Data.List as L
-import qualified Data.Map.Strict as M
 import qualified Data.Text as T
 import qualified Fallout2.Types as F
 
 import Data.Attoparsec.Text hiding (char, string)
 import Fallout2.Parser.Tokens
-import Fallout2.Parser.Permutation
+import Fallout2.Parser.KeyVal
 import Prelude hiding (takeWhile)
 
 -- parsing an NPC line (e.g. type_01=ratio:25%,Item...)
@@ -27,10 +25,10 @@ npcLine :: Parser F.Npc
 npcLine = do
     npcType
     char equals_
-    keyVals <- mapKeyVals <$> commaSep keyVal
+    keyVals <- fromList <$> commaSep keyVal
     skipSpace
     name <- F.Name <$> comment
-    runPermParser (makeNpc name) keyVals
+    runKeyValParser (makeNpc name) keyVals
 
 parseDead :: Parser F.NpcStatus
 parseDead = return F.Dead
@@ -97,9 +95,6 @@ keyVal = do
     removeColon = T.drop 1
 
 -- utils
-
-mapKeyVals :: [(T.Text, T.Text)] -> KeyValsMap
-mapKeyVals = L.foldl' (\kvs (k,v) -> M.insertWith (++) k [v] kvs) M.empty
 
 char :: C.Char -> Parser ()
 char = void . A.char

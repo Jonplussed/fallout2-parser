@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Fallout2.Parser.Permutation
+module Fallout2.Parser.KeyVal
   ( KeyValsMap
   , PermParser
   , opt1
@@ -9,11 +9,13 @@ module Fallout2.Parser.Permutation
   , reqN
   , opt1Of
   , req1Of
-  , runPermParser
+  , runKeyValParser
+  , fromList
   ) where
 
 import Control.Monad.Reader (Reader, ask, runReader)
 import Control.Monad.Trans.Except (ExceptT, throwE, runExceptT)
+import Data.List (foldl')
 import Data.Maybe (catMaybes)
 import Data.Monoid ((<>))
 import Data.Attoparsec.Text (Parser, parseOnly)
@@ -68,8 +70,11 @@ req1Of opts = do
       Nothing -> throwE . oneOfKeyReq $ map fst opts
       Just val -> return val
 
-runPermParser :: PermParser a -> KeyValsMap -> Parser a
-runPermParser parser = either fail return . runReader (runExceptT parser)
+runKeyValParser :: PermParser a -> KeyValsMap -> Parser a
+runKeyValParser parser = either fail return . runReader (runExceptT parser)
+
+fromList :: [(T.Text, T.Text)] -> KeyValsMap
+fromList = foldl' (\kvs (k,v) -> M.insertWith (++) k [v] kvs) M.empty
 
 -- error messages
 
